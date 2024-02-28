@@ -20,3 +20,51 @@ https://www.youtube.com/watch?v=ft30zcMlFao
 setup:
 npm install -D tailwindcss
 npx tailwindcss init
+
+
+HTMX setup
+===========================================================
+> npm init
+> npm install -D prettier prettier-plugin-go-template
+> touch prettier.config.cjs
+
+    const config = {
+        plugins: ["prettier-plugin-go-template"],
+        override: [
+            {
+                files: ["*.html"],
+                option: {
+                    parser: "go-template"
+                },
+            },
+        ],
+    };
+
+    module.exports = config
+
+> npm install -D vite
+> npm install htmx.org
+
+> touch vite.config.js 
+
+    import { resolve } from "path";
+    import { defineConfig } from "vite";
+
+    export default defineConfig({
+        build: {
+            lib: {
+                entry: [resolve(__dirname, "src/htmx.js")],
+                formats: ["es"],
+                name: "[name]",
+                fileName: "[name]"
+            },
+            outDir: "static",
+            emptyOutDir: false
+        },
+    });
+
+
+- add `"type": "module",` inside package.json
+- add "dev": "vite build --watch" in script section of package.json
+- write src/htmx.js file
+> npm run dev
