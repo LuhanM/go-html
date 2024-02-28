@@ -12,7 +12,6 @@ func HomePageHandler(ctx *gin.Context) {
 }
 
 func parseHomePage(wr io.Writer) {
-	tmpl, _ := template.ParseFiles("index.html")
-	data := map[string]int{}
-	tmpl.ExecuteTemplate(wr, "index.html", data)
+	tmpl, _ := template.New("").ParseFiles("templates/home.html")
+	tmpl.ExecuteTemplate(wr, "Home", nil)
 }
